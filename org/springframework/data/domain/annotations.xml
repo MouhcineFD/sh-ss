@@ -1,0 +1,5 @@
+<root>
+    <item name='org.springframework.data.domain.PageRequest'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
