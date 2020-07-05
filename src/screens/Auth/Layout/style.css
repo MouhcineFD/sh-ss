@@ -1,0 +1,87 @@
+.border {
+  border: black solid;
+}
+
+.root {
+  height: 100vh;
+}
+
+.left-container {
+  background: #b7ba28;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.left-content {
+  margin-top: 80px;
+  width: 80%;
+}
+
+.right-container {
+  background: #ffffff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.right-content {
+  /* background-color: yellow; */
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.right-content-header {
+  /* background-color: rgb(44, 27, 107); */
+  text-align: center;
+}
+.right-content-body {
+  /* background-color: rgb(255, 0, 157); */
+  text-align: center;
+}
+.right-content-footer {
+  /* background-color: rgb(0, 255, 128); */
+  text-align: center;
+}
+
+.image-1 {
+  width: 100%;
+}
+
+.image-2 {
+  width: 50%;
+}
+
+.image-background {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+}
+
+.header-text-1 {
+  /* HR Advisor */
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 65px;
+  line-height: 79px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.header-text-2 {
+  /* Votre Plateforme de Gestion de Communication RH, FAQ et enquêtes de satisfaction. */
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 46px;
+  text-align: center;
+
+  color: #ffffff;
+}

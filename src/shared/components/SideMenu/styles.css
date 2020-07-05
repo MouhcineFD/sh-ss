@@ -1,0 +1,16 @@
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background-color: #042d58 !important;
+    color: #e5e5e5 !important;
+}
+
+.ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a{
+    color: #e5e5e5 !important;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    background-color: #b7ba28 !important
+}
+
+.ant-menu{
+    height: auto !important;
+}
