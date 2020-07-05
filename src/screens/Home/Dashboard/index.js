@@ -94,7 +94,7 @@ const List = (props) => {
     ),
     onFilter: (value, record) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    render: (text) => (
+    render: (text="") => (
       <Highlighter
         highlightStyle={communicationStyle.highlightStyle}
         searchWords={[searchText]}
