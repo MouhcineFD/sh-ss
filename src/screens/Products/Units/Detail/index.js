@@ -1,10 +1,11 @@
 import "ant-design-pro/dist/ant-design-pro.css";
 import { ChartCard, Field } from "ant-design-pro/lib/Charts";
-import { Card as CardAntd, Col, Icon, Row, Table, Tooltip } from "antd";
+import { Card as CardAntd, Col, Icon, Row, Table, Tooltip, Button } from "antd";
 import { Axis, Chart, Geom, Legend, Tooltip as TL } from "bizcharts";
 import React from "react";
 import { useRequest } from "../../../../shared/useRequest";
-
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
 const columnsCommunications = [
   {
     title: "Name",
@@ -24,7 +25,20 @@ const columnsCommunications = [
   },
 ];
 
+
+
 const IntentForm = (props) => {
+
+  const saveDoc = () => {
+    const input = document.getElementById("divToPrint");
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "JPEG", 0, 0);
+      pdf.save(`${props.match.params.id}.pdf`);
+    });
+  };
+
   const request = useRequest({
     url: `/products/{id}`,
     payload: {
@@ -65,62 +79,65 @@ const IntentForm = (props) => {
   });
 
   return (
-    <div>
-      <Row>
-        <Col span={24} style={{ marginTop: 24 }}>
-          <CardAntd title="Detail de produit" bordered={false}>
-            <Table
-              columns={columnsCommunications}
-              dataSource={[request.data || {}]}
-            />
-          </CardAntd>
-        </Col>
-        <Col span={24}>
-          <ChartCard
-            action={
-              <Tooltip title="Fréquence d'utilisation de l'application mobile">
-                <Icon type="info-circle-o" />
-              </Tooltip>
-            }
-            title="Nombre totale de ventes"
-            total={<span>{totaleSales}</span>}
-            footer={
-              <div>
-                <Field label="Augmentation sur stock" value={stockAdd} />
-              </div>
-            }
-          >
-            <Chart height={220} data={data} forceFit>
-              <Legend />
-              <Axis name="reference" />
-              <Axis name="value" />
-              <TL />
+    <>
+      <Button onClick={saveDoc}>Download</Button>
+      <div id="divToPrint">
+        <Row>
+          <Col span={24} style={{ marginTop: 24 }}>
+            <CardAntd title="Detail de produit" bordered={false}>
+              <Table
+                columns={columnsCommunications}
+                dataSource={[request.data || {}]}
+              />
+            </CardAntd>
+          </Col>
+          <Col span={24}>
+            <ChartCard
+              action={
+                <Tooltip title="Fréquence d'utilisation de l'application mobile">
+                  <Icon type="info-circle-o" />
+                </Tooltip>
+              }
+              title="Nombre totale de ventes"
+              total={<span>{totaleSales}</span>}
+              footer={
+                <div>
+                  <Field label="Augmentation sur stock" value={stockAdd} />
+                </div>
+              }
+            >
+              <Chart height={220} data={data} forceFit>
+                <Legend />
+                <Axis name="reference" />
+                <Axis name="value" />
+                <TL />
 
-              <Geom
-                type="area"
-                position="reference*value"
-                shape={"smooth"}
-                color={[
-                  "type",
-                  [
-                    "l (90) 0:rgba(0, 146, 255, 1) 1:rgba(0, 146, 255, 0.1)",
-                    "l (90) 0:rgba(0, 268, 0, 1) 1:rgba(0, 268, 0, 0.1)",
-                  ],
-                ]}
-                tooltip={null}
-              />
-              <Geom
-                type="line"
-                position="reference*value"
-                shape={"smooth"}
-                size={2}
-                color={["type", ["rgba(0, 146, 255, 1)", "#00ff00"]]}
-              />
-            </Chart>
-          </ChartCard>
-        </Col>
-      </Row>
-    </div>
+                <Geom
+                  type="area"
+                  position="reference*value"
+                  shape={"smooth"}
+                  color={[
+                    "type",
+                    [
+                      "l (90) 0:rgba(0, 146, 255, 1) 1:rgba(0, 146, 255, 0.1)",
+                      "l (90) 0:rgba(0, 268, 0, 1) 1:rgba(0, 268, 0, 0.1)",
+                    ],
+                  ]}
+                  tooltip={null}
+                />
+                <Geom
+                  type="line"
+                  position="reference*value"
+                  shape={"smooth"}
+                  size={2}
+                  color={["type", ["rgba(0, 146, 255, 1)", "#00ff00"]]}
+                />
+              </Chart>
+            </ChartCard>
+          </Col>
+        </Row>
+      </div>
+    </>
   );
 };
 
